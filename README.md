@@ -93,3 +93,31 @@ There are several approaches to API versioning, including:
 - https://blog.dreamfactory.com/best-practices-for-naming-rest-api-endpoints
 - https://www.postman.com/api-platform/api-versioning/
 - https://www.restapitutorial.com/introduction/restquicktips
+
+# Cookies and Sessions
+
+At its core, HTTP is a set of rules for transferring the myriad of files and data that makeup websites from text and images to videos and more. It’s built on the bedrock principles of resources, identifiable by Uniform Resource Identifiers (URIs), and the simple but powerful client server communication model.
+
+However, HTTP was designed to be stateless. This means that each request from your browser to the server is treated as an entirely new interaction, with no memory of previous requests. While this simplicity has benefits, it poses a challenge: How does a server remember who we are from one transaction to the next?
+
+This is where the invention of cookies and sessions comes in. They are like the web’s solution for giving a short-term memory to the otherwise forgetful HTTP conversations.
+
+![cookies vs sessions by bytebytego](https://assets.bytebytego.com/diagrams/0154-cookies-vs-session.png)
+
+## What are cookies?
+
+Cookies are tiny data files that web servers ask web browsers to store on a user’s device. Whenever the browser fetches a page from the server, it sends these cookies back to the server. Through this mechanism, cookies enable the server to “memorize” certain bits of user information, thus supporting a range of things like keeping the user logged in, storing site preferences, and tracking user browsing patterns.
+
+## The structure of a cookie
+
+1. **name**: The key or identifier for the cookie. It's the name by which the cookie is referenced.
+2. **value**: The data stored within the cookie. This is the information the server wants to remember about the user.
+3. **expires**: The date and time when the cookie will expire. After this, the cookie will automatically be removed.
+4. **path**: This defines the scope of the cookie within the domain – which URLs the cookie should be sent to.
+5. **domain**: Specifies which domain the cookie belongs to. It sets the scope of the cookie to the specified domain and its subdomains.
+6. **secure**: A flag indicating that the cookie should only be sent over secure protocols like HTTPS.
+7. **HttpOnly**: A flag that helps mitigate the risk of client side script accessing the protected cookie.
+
+## References
+
+- https://medium.com/@m-mdy-m/understanding-cookies-and-sessions-in-node-js-f67995d321ed

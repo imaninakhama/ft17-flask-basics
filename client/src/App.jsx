@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import CustomerCard from './components/customer-card';
 import CustomerForm from './components/customer-form';
+import Login from './components/login';
 
 // this is not the best way. Why is it not recommended? What is the best way?
-const serverUrl = 'http://127.0.0.1:5000';
+export const serverUrl = 'http://127.0.0.1:5000';
 
 function App() {
 	const [customers, setCustomers] = useState([]);
@@ -44,8 +45,10 @@ function App() {
 	return (
 		<main className="h-screen max-w-7xl mx-auto">
 			<div className="grid grid-cols-3 gap-5 h-full py-10 px-5">
-				<section className="col-span-1 ">
+				<section className="col-span-1 flex flex-col gap-10 ">
 					<CustomerForm onAddCustomer={handleAddCustomer} />
+
+					<Login />
 				</section>
 				<section className="col-span-2 grid grid-cols-3 gap-5 h-fit">
 					{customers.map((customer) => (

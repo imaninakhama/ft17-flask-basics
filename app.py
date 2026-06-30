@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from customer import Customer
 import structlog
 from flask_cors import CORS
@@ -85,3 +85,41 @@ def update_customer(id):
 @app.route("/customers/<int:id>", methods=["DELETE"])
 def delete_customer(id):
     pass
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    if request.method == "POST":
+        data = request.get_json()
+
+        email = data.get("email")
+        password = data.get("password")
+
+        response = make_response({"email": email, "password": password}, 200)
+        response.set_cookie("logged_in", "true")
+        response.set_cookie("theme", "dark")
+        response.set_cookie("username", "mongare")
+
+        return response
+
+
+@app.route("/login-without-data", methods=["POST"])
+def login_without_data():
+    if request.method == "POST":
+        response = make_response(
+            {"email": "admin@gmail.com", "password": "123456789"}, 200
+        )
+        response.set_cookie("logged_in", "true")
+        response.set_cookie("theme", "dark")
+        response.set_cookie("username", "mongare")
+
+        return response
+
+
+@app.route("/cookies", methods=["GET"])
+def get_cookies():
+    username = request.cookies.get("username")
+    login_status = request.cookies.get("logged_in")
+    theme = request.cookies.get("theme")
+
+    return {"username": username, "login_status": login_status, "theme": theme}
