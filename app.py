@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from customer import Customer
 import structlog
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # configure logging
 log = structlog.get_logger()
@@ -39,8 +41,8 @@ def log_request():
 @app.route("/customers", methods=["GET", "POST"])
 def customers():
     if request.method == "POST":
-        # data = request.get_json()
-        data = request.form
+        data = request.get_json()
+        # data = request.form
         log.info("add_customer_request", request_data=data)
 
         # retrieve the data from the request
@@ -63,6 +65,8 @@ def customers():
         return jsonify(customer.to_dict()), 201
 
     all_customers = [customer.to_dict() for customer in customer_list]
+
+    log.info("get_all_customers", customers=all_customers)
 
     return jsonify(all_customers), 200
 

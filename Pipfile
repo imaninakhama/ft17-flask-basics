@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 flask = "*"
 structlog = "*"
+flask-cors = "*"
 
 [dev-packages]
 
